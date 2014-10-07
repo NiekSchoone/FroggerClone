@@ -10,8 +10,8 @@ package
 	public class Main extends Sprite 
 	{
 		
-		private var game : Game = new Game;
-		private var menu : Menu = new Menu;
+		private var game : Game;
+		private var menu : Menu;
 		
 		public function Main():void 
 		{
@@ -24,13 +24,16 @@ package
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
 			
+			menu = new Menu();
+			
 			addChild(menu);
-			menu.addEventListener("startgame", Start);
+			menu.addEventListener("startgame", StartGame);
 			
 		}
 		
-		private function Start(e:Event):void
+		private function StartGame(e:Event):void
 		{
+			game = new Game();
 			menu.visible = false;
 			addChild(game);
 		}
