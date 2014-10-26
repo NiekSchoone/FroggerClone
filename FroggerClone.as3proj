@@ -6,12 +6,12 @@
     <movie input="" />
     <movie path="bin\FroggerClone.swf" />
     <movie fps="30" />
-    <movie width="750" />
-    <movie height="600" />
-    <movie version="10" />
-    <movie minorVersion="1" />
+    <movie width="650" />
+    <movie height="675" />
+    <movie version="11" />
+    <movie minorVersion="9" />
     <movie platform="Flash Player" />
-    <movie background="#FFFFFF" />
+    <movie background="#000000" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>

@@ -1,22 +1,25 @@
 package  
 {
-	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.display.MovieClip;
 	
 	/**
 	 * ...
 	 * @author Niek Schoone
 	 */
-	public class Car extends MovieClip
+	public class Log extends MovieClip
 	{
-		private var car 	: 	sCar 	= 	new sCar();
-		public var speed 	: 	Number 	= 	0;
+		private var log		:	sLog 	= 	new sLog();
+		//public var dir 		: 	int 	= 	0;
+		public var speed	:	Number 	= 	0;
 		
-		public function Car(speed : Number)
+		public function Log(speed : Number) 
 		{
 			addEventListener(Event.ADDED_TO_STAGE, init);
 			
 			this.speed = speed;
+			
+			//this.dir = dir; 
 			
 		}
 		
@@ -24,9 +27,10 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			addChild(car);
+			addChild(log);
 			
 			addEventListener(Event.ENTER_FRAME, update);
+			
 		}
 		
 		public function update(e:Event):void
@@ -35,5 +39,5 @@ package
 		}
 		
 	}
-	
+
 }

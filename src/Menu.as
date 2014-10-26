@@ -9,7 +9,8 @@ package
 	 */
 	public class Menu extends MovieClip
 	{
-		private var startButton : sSquare = new sSquare;
+		private var startButton : 	sStartbutton 	= 	new sStartbutton();
+		private var tittle		:	sFroggerTittle	=	new sFroggerTittle();
 		
 		public function Menu() 
 		{
@@ -27,16 +28,41 @@ package
 		
 		private function startMenu():void
 		{
+			//Adding the tittle
+			addChild(tittle);
+			tittle.x = 325;
+			tittle.y = 250;
+			
 			//Adding startbutton
 			addChild(startButton);
-			startButton.x = stage.stageWidth/2
-			startButton.y = 300;
+			startButton.gotoAndStop(1);
+			startButton.x = 175;
+			startButton.y = 535;
 			
 			var buttonHolder:MovieClip = new MovieClip();
 			
 			addChild(buttonHolder);
 			buttonHolder.addChild(startButton);
-			buttonHolder.addEventListener(MouseEvent.CLICK, click);
+			
+			startButton.addEventListener(MouseEvent.CLICK, click);
+			startButton.addEventListener(MouseEvent.MOUSE_OVER, onHoover);
+			startButton.addEventListener(MouseEvent.MOUSE_OUT, ofHoover);
+		}
+		
+		private function ofHoover(e:MouseEvent):void
+		{
+			if (e.target == startButton)
+			{
+				startButton.gotoAndStop(1);
+			}
+		}
+		
+		private function onHoover(e:MouseEvent):void
+		{
+			if (e.target == startButton)
+			{
+				startButton.gotoAndStop(2);
+			}
 		}
 		
 		private function click(e:MouseEvent):void
