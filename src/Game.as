@@ -1,8 +1,10 @@
 package  
 {
+	import adobe.utils.CustomActions;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.media.Sound;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
 	
@@ -38,6 +40,10 @@ package
 		
 		private var score			:	Score;
 		
+		private var startupMusic	:	Sound = new sGameStart(); 
+		private var froggerDeath	:	Sound = new sFroggerDeath();
+		private var frogReset		:	Sound = new sResetFrog();
+		
 		public function Game()
 		{	
 			addEventListener(Event.ADDED_TO_STAGE, init);
@@ -47,7 +53,7 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			
+			startupMusic.play();
 			
 			background = new Background();
 			addChild(background);
@@ -136,6 +142,8 @@ package
 		//on a death event, call to this function to reset the player to the start of the level.
 		private function resetPlayerPos():void
 		{
+			froggerDeath.play();
+			frogReset.play();
 			player.frogger.x = 325;
 			player.frogger.y = 600;
 		}
@@ -210,8 +218,6 @@ package
 			logLogic();
 			homeLogic();
 			gameOver();
-			
-			trace(newCar.car.totalFrames);
 			
 			
 			for (var i : int = 0; i < carArray.length; i++ )

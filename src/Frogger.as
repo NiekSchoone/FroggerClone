@@ -4,6 +4,7 @@ package
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
+	import flash.media.Sound;
 	/**
 	 * ...
 	 * @author Niek Schoone
@@ -18,6 +19,8 @@ package
 		private var canMove				:	Boolean = true;
 		
 		public var speed				: 	Number 	= 0;
+		
+		private var jumpSound			:	Sound = new sFroggerHop();
 		
 		public function Frogger() 
 		{
@@ -49,6 +52,7 @@ package
 			{
 				if (frogger.y > 0 + frogger.height)
 				{
+					jumpSound.play();
 					frogger.gotoAndStop(2);
 					frogger.y -= 50;
 					canMove = false;
@@ -60,6 +64,7 @@ package
 			{
 				if (frogger.y < 650 - frogger.height)
 				{
+					jumpSound.play();
 					frogger.gotoAndStop(2);
 					frogger.y += 50;
 					canMove = false;
@@ -71,6 +76,7 @@ package
 			{
 				if (frogger.x < stage.stageWidth - frogger.width)
 				{
+					jumpSound.play();
 					frogger.gotoAndStop(2);
 					frogger.x += 50;
 					canMove = false;
@@ -81,6 +87,7 @@ package
 			{
 				if (frogger.x > 0 + frogger.width)
 				{
+					jumpSound.play();
 					frogger.gotoAndStop(2);
 					frogger.x -= 50;
 					canMove = false;

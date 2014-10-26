@@ -3,6 +3,7 @@ package
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.media.Sound;
 	/**
 	 * ...
 	 * @author Niek Schoone
@@ -11,6 +12,7 @@ package
 	{
 		private var startButton : 	sStartbutton 	= 	new sStartbutton();
 		private var tittle		:	sFroggerTittle	=	new sFroggerTittle();
+		private var startMusic	:	Sound = new sMenuStart();
 		
 		public function Menu() 
 		{
@@ -21,6 +23,8 @@ package
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
+			startMusic.play();
 			
 			//Starting "startMenu" function
 			startMenu();
