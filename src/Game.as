@@ -23,6 +23,7 @@ package
 		private var background	:   Background;
 		
 		private var lives 		:	Number	=	3;
+		private var livesCounter:	sLives;
 		
 		private var homeAmount 	: 	int		= 	5;
 		
@@ -64,6 +65,12 @@ package
 			
 			score = new Score();
 			addChild(score);
+			
+			livesCounter = new sLives();
+			addChild(livesCounter);
+			livesCounter.gotoAndStop(3);
+			livesCounter.x = 50;
+			livesCounter.y = 650;
 			
 			//Adding the player
 			player = new Frogger();
@@ -235,6 +242,16 @@ package
 			homeLogic();
 			gameOver();
 			
+			if (lives == 1)
+			{
+				livesCounter.gotoAndStop(1)
+			}
+			
+			if (lives == 2)
+			{
+				livesCounter.gotoAndStop(2)
+			}
+			
 			for (var i : int = 0; i < carArray.length; i++ )
 			{
 				carArray[i].update(e);
@@ -249,7 +266,6 @@ package
 			{
 				if (!standingOnLog)
 				{
-					
 					froggerDeath.play();
 					trace("BLUB");
 					lives--;
@@ -262,8 +278,10 @@ package
 		{
 			removeChild(player);
 			removeChild(score);
+			removeChild(livesCounter);
 			
 			removeEventListener(Event.ENTER_FRAME, update);
+			
 			
 			for (var i = carArray.length-1; i>= 0; i--)
 			{
