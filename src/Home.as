@@ -21,6 +21,8 @@ package
 			
 			home = new sHome();
 			addChild(home);
+			
+			home.gotoAndStop(1);
 		}
 		
 	}

@@ -30,6 +30,7 @@ package
 		private var homeArray		: 	Array;
 		private var logArray 		: 	Array;
 		private var carArray 		: 	Array;
+		private var homeFreeArray	:	Array;
 		
 		//Array for the positions of the objects
 		private var logPosArray 	: 	Array;
@@ -39,6 +40,8 @@ package
 		//private var goToWin			:	Boolean = false;
 		
 		private var score			:	Score;
+		
+		private var newHomeFree : sFilledHome;
 		
 		//sounds
 		private var startupMusic	:	Sound = new sGameStart(); 
@@ -71,6 +74,9 @@ package
 			
 			logArray = new Array();
 			
+			
+			homeFreeArray = new Array();
+			
 			homeArray = new Array();
 			
 			//Declares positions for cars / logs with an array
@@ -90,9 +96,9 @@ package
 			
 			//Spawn logs
 			/*row 1*/ SpawnLogs(0, 0, 1.5);
-			/*row 2*/ SpawnLogs(1, 650, -2);
+			/*row 2*/ SpawnLogs(1, 650, -2); SpawnLogs(1, 870, -2); SpawnLogs(1, 1100, -2);
 			/*row 3*/ SpawnLogs(2, 0, 2.5);
-			/*row 4*/ SpawnLogs(3, 650, -3);
+			/*row 4*/ SpawnLogs(3, 650, -1); SpawnLogs(3, 975, -1);
 			
 		}
 		
@@ -179,12 +185,20 @@ package
 		
 		private function spawnHomes():void
 		{
+			for (var hf : int = 0; hf < homeAmount; hf++ )
+			{
+				newHomeFree = new sFilledHome();
+				homeFreeArray.push(newHomeFree);
+				addChild(newHomeFree);
+				homeFreeArray[hf].x = stage.stageWidth / homeAmount * hf + homeFreeArray[hf].width + 15;
+				homeFreeArray[hf].y = 100;
+			}
+			
 			for (var h : int = 0; h < homeAmount; h++)
 			{
 				newHome = new Home();
 				homeArray.push(newHome);
 				addChild(newHome);
-				newHome.home.gotoAndStop(1);
 				homeArray[h].x = stage.stageWidth / homeAmount * h + homeArray[h].width + 15;
 				homeArray[h].y = 100;
 			}
@@ -200,8 +214,6 @@ package
 					
 					homeArray.splice(homeIndex, 1);
 					
-					addChild()
-					
 					Score.scoreValue += 1000;
 					
 					resetPlayerPos();
@@ -212,7 +224,7 @@ package
 			
 			if (homeArray.length == 0)
 			{
-				resetPlayerPos();
+				clearGame();
 			}
 		}
 		
@@ -223,7 +235,6 @@ package
 			homeLogic();
 			gameOver();
 			
-			
 			for (var i : int = 0; i < carArray.length; i++ )
 			{
 				carArray[i].update(e);
@@ -232,11 +243,6 @@ package
 			for (var i : int = 0; i < logArray.length; i++ )
 			{
 				logArray[i].update(e)
-			}
-			
-			if (homeArray.length == 0)
-			{
-				gameWon();
 			}
 			
 			if (player.frogger.y < 350)
@@ -257,6 +263,8 @@ package
 			removeChild(player);
 			removeChild(score);
 			
+			removeEventListener(Event.ENTER_FRAME, update);
+			
 			for (var i = carArray.length-1; i>= 0; i--)
 			{
 				removeChild(carArray[i]);
@@ -269,6 +277,12 @@ package
 				homeArray.splice(i,1);
 			}
 			
+			for (var i = homeFreeArray.length - 1; i>= 0; i--)
+			{
+				removeChild(homeFreeArray[i]);
+				homeFreeArray.splice(i,1);
+			}
+			
 			for (var i = logArray.length-1; i>= 0; i--)
 			{
 				removeChild(logArray[i]);
@@ -277,7 +291,6 @@ package
 			
 			Score.scoreValue = 0;
 			
-			removeEventListener(Event.ENTER_FRAME, update);
 		}
 		
 		private function gameOver():void
@@ -290,29 +303,7 @@ package
 		
 		private function gameWon():void
 		{
-			for (var i = carArray.length-1; i>= 0; i--)
-			{
-				removeChild(carArray[i]);
-				carArray.splice(i,1);
-			}
-			
-			for (var i = homeArray.length-1; i>= 0; i--)
-			{
-				removeChild(homeArray[i]);
-				homeArray.splice(i,1);
-			}
-			
-			for (var i = logArray.length-1; i>= 0; i--)
-			{
-				removeChild(logArray[i]);
-				logArray.splice(i,1);
-			}
-			
-			removeChild(player);
-			removeChild(score);
-			
-			removeEventListener(Event.ENTER_FRAME, update);
-			
+			clearGame();
 		}
 	}
 }
