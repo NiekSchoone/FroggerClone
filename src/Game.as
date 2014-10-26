@@ -40,6 +40,7 @@ package
 		
 		private var score			:	Score;
 		
+		//sounds
 		private var startupMusic	:	Sound = new sGameStart(); 
 		private var froggerDeath	:	Sound = new sFroggerDeath();
 		private var frogReset		:	Sound = new sResetFrog();
@@ -123,6 +124,8 @@ package
 				
 				if (carArray[i].hitTestObject(player))
 				{
+					
+					froggerDeath.play();
 					trace("SPLAT");
 					lives--;
 					resetPlayerPos();
@@ -142,7 +145,6 @@ package
 		//on a death event, call to this function to reset the player to the start of the level.
 		private function resetPlayerPos():void
 		{
-			froggerDeath.play();
 			frogReset.play();
 			player.frogger.x = 325;
 			player.frogger.y = 600;
@@ -198,6 +200,8 @@ package
 					
 					homeArray.splice(homeIndex, 1);
 					
+					addChild()
+					
 					Score.scoreValue += 1000;
 					
 					resetPlayerPos();
@@ -230,10 +234,17 @@ package
 				logArray[i].update(e)
 			}
 			
+			if (homeArray.length == 0)
+			{
+				gameWon();
+			}
+			
 			if (player.frogger.y < 350)
 			{
 				if (!standingOnLog)
 				{
+					
+					froggerDeath.play();
 					trace("BLUB");
 					lives--;
 					resetPlayerPos();
@@ -244,6 +255,7 @@ package
 		private function clearGame()
 		{
 			removeChild(player);
+			removeChild(score);
 			
 			for (var i = carArray.length-1; i>= 0; i--)
 			{
@@ -263,16 +275,44 @@ package
 				logArray.splice(i,1);
 			}
 			
+			Score.scoreValue = 0;
+			
 			removeEventListener(Event.ENTER_FRAME, update);
 		}
 		
-		private function gameOver()
+		private function gameOver():void
 		{
 			if (lives == 0)
 			{
-				Score.scoreValue = 0;
 				clearGame();
 			}
+		}
+		
+		private function gameWon():void
+		{
+			for (var i = carArray.length-1; i>= 0; i--)
+			{
+				removeChild(carArray[i]);
+				carArray.splice(i,1);
+			}
+			
+			for (var i = homeArray.length-1; i>= 0; i--)
+			{
+				removeChild(homeArray[i]);
+				homeArray.splice(i,1);
+			}
+			
+			for (var i = logArray.length-1; i>= 0; i--)
+			{
+				removeChild(logArray[i]);
+				logArray.splice(i,1);
+			}
+			
+			removeChild(player);
+			removeChild(score);
+			
+			removeEventListener(Event.ENTER_FRAME, update);
+			
 		}
 	}
 }

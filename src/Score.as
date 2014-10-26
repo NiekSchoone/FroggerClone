@@ -12,7 +12,7 @@ package
 	{
 		public static var scoreValue  :	int = 0;
 		
-		private var scoreText	:	TextField;
+		public var scoreText	:	TextField;
 		
 		private var sTF:TextFormat = new TextFormat("impact", 30, 0xFFFFFF, false);
 		
@@ -27,7 +27,7 @@ package
 			scoreText.y = 8;
 			
 			scoreText.setTextFormat(sTF);
-			scoreText.width = 100;
+			scoreText.width = 200;
 			
 			addChild(scoreText);
 			
