@@ -9,7 +9,7 @@ package
 	 */
 	public class Car extends MovieClip
 	{
-		private var car 	: 	sCar 	= 	new sCar();
+		public var car 	: 	sCar 	= 	new sCar();
 		public var speed 	: 	Number 	= 	0;
 		
 		public function Car(speed : Number)
@@ -17,6 +17,7 @@ package
 			addEventListener(Event.ADDED_TO_STAGE, init);
 			
 			this.speed = speed;
+			
 			
 		}
 		

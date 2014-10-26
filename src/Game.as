@@ -47,6 +47,8 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
+			
+			
 			background = new Background();
 			addChild(background);
 			
@@ -69,17 +71,15 @@ package
 			
 			logPosArray = new Array(300, 250, 200, 150);
 			
-			
-			
 			addEventListener(Event.ENTER_FRAME, update);
 			
 			spawnHomes();
 			
 			//Spawn cars
-			/*row 1*/ SpawnCars(0, 0, 4, 1); SpawnCars(0, -300, 4, 1);
-			/*row 2*/ SpawnCars(1, 650, -2, 2); SpawnCars(1, 950, -2, 2);
-			/*row 3*/ SpawnCars(2, 0, 3, 3); SpawnCars(2, -500, 3, 3);
-			/*row 4*/ SpawnCars(3, 650, -1, 4); SpawnCars(3, 1100, -1, 4); SpawnCars(3, 1350, -1, 4);
+			/*row 1*/ SpawnCars(0, 0, 4, 5); SpawnCars(0, -325, 4, 5);
+			/*row 2*/ SpawnCars(1, 650, -2, 4); SpawnCars(1, 950, -2, 4);
+			/*row 3*/ SpawnCars(2, 0, 2.5, 2); SpawnCars(2, -400, 2.5, 2);
+			/*row 4*/ SpawnCars(3, 650, -1, 1); SpawnCars(3, 900, -1, 1); SpawnCars(3, 1150, -1, 1);
 			
 			//Spawn logs
 			/*row 1*/ SpawnLogs(0, 0, 1.5);
@@ -99,12 +99,12 @@ package
 			addChild(newLog);
 		}
 		
-		private function SpawnCars(carY:int, carX:int, speed:Number, carType:Number):void
+		private function SpawnCars(carY:int, carX:int, speed:Number, carType:int):void
 		{
 			newCar = new Car(speed);
 			newCar.y = carPosArray[carY];
 			newCar.x = carX;
-			newCar.gotoAndStop(carType);
+			newCar.car.gotoAndStop(carType);
 			carArray.push(newCar);
 			addChild(newCar);
 		}
@@ -174,6 +174,7 @@ package
 				newHome = new Home();
 				homeArray.push(newHome);
 				addChild(newHome);
+				newHome.home.gotoAndStop(1);
 				homeArray[h].x = stage.stageWidth / homeAmount * h + homeArray[h].width + 15;
 				homeArray[h].y = 100;
 			}
@@ -210,6 +211,8 @@ package
 			homeLogic();
 			gameOver();
 			
+			trace(newCar.car.totalFrames);
+			
 			
 			for (var i : int = 0; i < carArray.length; i++ )
 			{
@@ -221,7 +224,7 @@ package
 				logArray[i].update(e)
 			}
 			
-			if (player.frogger.y < 275)
+			if (player.frogger.y < 350)
 			{
 				if (!standingOnLog)
 				{

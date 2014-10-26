@@ -8,7 +8,7 @@ package
 	 */
 	public class Home extends MovieClip
 	{
-		private var home : MovieClip;
+		public var home : MovieClip;
 		
 		public function Home() 
 		{
