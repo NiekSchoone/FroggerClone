@@ -1,4 +1,4 @@
-package  
+﻿package  
 {
 	import adobe.utils.CustomActions;
 	import flash.display.MovieClip;

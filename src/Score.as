@@ -14,7 +14,7 @@ package
 		
 		public var scoreText	:	TextField;
 		
-		private var sTF:TextFormat = new TextFormat("impact", 30, 0xFFFFFF, false);
+		private var sTF			:	TextFormat = new TextFormat("impact", 30, 0xFFFFFF, false);
 		
 		public function Score() 
 		{
