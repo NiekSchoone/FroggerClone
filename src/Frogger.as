@@ -11,7 +11,7 @@ package
 	 */
 	public class Frogger extends MovieClip
 	{
-		public var frogger : sFrog = new sFrog();
+		public var frogger 				: 	sFrog = new sFrog();
 		
 		private var playerDirectionX 	: 	Number 	= 0;
 		private var playerDirectionY 	: 	Number 	= 0;

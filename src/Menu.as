@@ -10,9 +10,9 @@ package
 	 */
 	public class Menu extends MovieClip
 	{
-		private var startButton : 	sStartbutton 	= 	new sStartbutton();
-		private var tittle		:	sFroggerTittle	=	new sFroggerTittle();
-		private var startMusic	:	Sound = new sMenuStart();
+		private var startButton : 	MovieClip	 	= 	new sStartbutton();
+		private var tittle		:	MovieClip		=	new sFroggerTittle();
+		private var startMusic	:	Sound 			= 	new sMenuStart();
 		
 		public function Menu() 
 		{

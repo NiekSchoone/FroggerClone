@@ -5,6 +5,8 @@
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.media.Sound;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
 	
@@ -131,7 +133,7 @@
 		
 		private function carLogic():void
 		{
-			for (var i = carArray.length - 1; i >= 0; i--)
+			for (var i:int = carArray.length - 1; i >= 0; i--)
 			{
 				carArray[i].x += carArray[i].speed;
 				
@@ -166,25 +168,25 @@
 		private function logLogic():void
 		{
 			standingOnLog = false;
-			for (var i = logArray.length - 1; i >= 0; i--)
+			for (var l:int = logArray.length - 1; l >= 0; l--)
 			{
-				logArray[i].x += logArray[i].speed;
+				logArray[l].x += logArray[l].speed;
 				
-				if (logArray[i].hitTestObject(player))
+				if (logArray[l].hitTestObject(player))
 				{
 					standingOnLog = true;
 					addChild(player);
-					player.frogger.speed = logArray[i].speed * 3;
+					player.frogger.speed = logArray[l].speed * 3;
 					player.frogger.x += player.frogger.speed;
 				}
 				
-				if (logArray[i].speed < 0 && logArray[i].x <= -50)
+				if (logArray[l].speed < 0 && logArray[l].x <= -50)
 				{
-					logArray[i].x = 650;
+					logArray[l].x = 650;
 				}
-				else if (logArray[i].speed > 0 && logArray[i].x >= 675)
+				else if (logArray[l].speed > 0 && logArray[l].x >= 675)
 				{
-					logArray[i].x = 0;
+					logArray[l].x = 0;
 				}
 				
 			}
@@ -257,9 +259,9 @@
 				carArray[i].update(e);
 			}
 			
-			for (var i : int = 0; i < logArray.length; i++ )
+			for (var l : int = 0; l < logArray.length; l++ )
 			{
-				logArray[i].update(e)
+				logArray[l].update(e)
 			}
 			
 			if (player.frogger.y < 350)
@@ -274,37 +276,37 @@
 			}
 		}
 		
-		private function clearGame()
+		private function clearGame():void
 		{
 			removeChild(player);
 			removeChild(score);
 			removeChild(livesCounter);
+			removeChild(background);
 			
 			removeEventListener(Event.ENTER_FRAME, update);
 			
-			
-			for (var i = carArray.length-1; i>= 0; i--)
+			for (var i:int = carArray.length-1; i>= 0; i--)
 			{
 				removeChild(carArray[i]);
 				carArray.splice(i,1);
 			}
 			
-			for (var i = homeArray.length-1; i>= 0; i--)
+			for (var h:int = homeArray.length-1; h>= 0; h--)
 			{
-				removeChild(homeArray[i]);
-				homeArray.splice(i,1);
+				removeChild(homeArray[h]);
+				homeArray.splice(h,1);
 			}
 			
-			for (var i = homeFreeArray.length - 1; i>= 0; i--)
+			for (var f:int = homeFreeArray.length - 1; f>= 0; f--)
 			{
-				removeChild(homeFreeArray[i]);
-				homeFreeArray.splice(i,1);
+				removeChild(homeFreeArray[f]);
+				homeFreeArray.splice(f,1);
 			}
 			
-			for (var i = logArray.length-1; i>= 0; i--)
+			for (var l:int = logArray.length-1; l>= 0; l--)
 			{
-				removeChild(logArray[i]);
-				logArray.splice(i,1);
+				removeChild(logArray[l]);
+				logArray.splice(l,1);
 			}
 			
 			Score.scoreValue = 0;
@@ -316,6 +318,20 @@
 			if (lives == 0)
 			{
 				clearGame();
+				
+				var text : TextField = new TextField();
+				var format : TextFormat = new TextFormat("Retro Computer", 50, 0xFF0000, true);
+				
+				text.text = "Game Over";
+				
+				text.width = 366;
+				
+				text.x = stage.stageWidth / 2 - 183;
+				text.y = stage.stageHeight / 2 - 50;
+				
+				text.setTextFormat(format);
+				
+				addChild(text);
 			}
 		}
 		

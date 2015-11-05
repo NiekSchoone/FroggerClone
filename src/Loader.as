@@ -29,7 +29,7 @@ package
 			
 			loadingBar 	= 	new sSquare();
 			loader_txt 	= 	new TextField();
-			sTF			= 	new TextFormat("impact", 30, 0xFFFFFF, false);
+			format			= 	new TextFormat("impact", 30, 0xFFFFFF, false);
 			
 			loadingBar.scaleY = 0.2;
 			loadingBar.x = stage.stageWidth / 2;
